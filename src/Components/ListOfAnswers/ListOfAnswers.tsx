@@ -4,21 +4,10 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Button } from "@material-ui/core";
+import SendIcon from '@material-ui/icons/Send'
 
 import RadioList from "./RadioList";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -37,19 +26,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+export default function ListOfAnswers(props:{text:string, options:Array<string>, setIndex:any, index:number, answers:any, isLast:boolean}) {
   const classes = useStyles();
+
+
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
 
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4">
-          Qual foi o seu primeiro bixo de estimação?
+        <Typography onMouseDown={(e:any) => {e.preventDefault(); return false}} component="h1" variant="h4">
+          {props.text}
         </Typography>
         <form className={classes.form} noValidate>
-          <RadioList />
+          <RadioList isLast={props.isLast} answers={props.answers} options={props.options} index={props.index} setIndex={props.setIndex}/>
         </form>
       </div>
     </Container>

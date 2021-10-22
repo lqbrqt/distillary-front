@@ -1,0 +1,17 @@
+{
+    "questions":[
+        {
+            "type":"codeQuestion",
+            "text":"Внимание вопрос: мать жива?"
+        },
+        {
+            "type":"textQuestion",
+            "text":"Внимание вопрос: мать жива?",
+            "options":["Да", "Нет"]
+        },
+        {
+            "type":"textQuestion",
+            "text":"Внимание вопрос: мать жива?"
+        }
+    ]
+}

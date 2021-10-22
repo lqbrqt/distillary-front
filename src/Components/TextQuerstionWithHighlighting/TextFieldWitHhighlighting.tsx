@@ -17,7 +17,7 @@ const CodeEditor = dynamic(
 
 const useStyles = makeStyles(theme => ({
     paper: {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(8),
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -25,27 +25,36 @@ const useStyles = makeStyles(theme => ({
     },
     form: {
       width: "100%", // Fix IE 11 issue.
-    //   marginTop: theme.spacing(4)
+      marginTop: theme.spacing(4)
     },
     submit: {
-    //   margin: theme.spacing(3, 0, 2)
+      margin: theme.spacing(3, 0, 2)
     }
   }));
 
-function TextFieldWitHhighlighting() {
+function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean}) {
   const [code, setCode] = React.useState(
     `function add(a, b) {\n  return a + b;\n}`
   );
 
     const classes = useStyles();
 
+    const buttonClickHandler = () => {
+        props.setIndex(props.index + 1);
+        props.answers.push({"type":"codeQuestion", "text": code})
+    }
+
+    const lastQuestionHandler = () => {
+        alert(props.isLast)
+    }
+
   return (
-    <Container component="main" >
+    <Container component="main" maxWidth="xs">
     <CssBaseline />
 
     <div className={classes.paper}>
-      <Typography component="h1" variant="h4">
-        Qual foi o seu primeiro bixo de estimação?
+      <Typography onMouseDown={(e:any) => {e.preventDefault(); return false}} component="h1" variant="h4">
+        {props.text}
       </Typography>
       <form className={classes.form} noValidate>
       <CodeEditor
@@ -64,8 +73,8 @@ function TextFieldWitHhighlighting() {
       />      
       </form>
     </div>
-    <Button variant="contained" endIcon={<SendIcon />}>
-        Send
+    <Button onClick={props.isLast ? lastQuestionHandler : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+        {props.isLast ? "Закончить опрос" : "Далее"}
     </Button>
   </Container>
   );

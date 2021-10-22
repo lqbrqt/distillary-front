@@ -1,13 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
+//@ts-ignore
+import Frame from 'react-frame-component';
+import MotherOfQuestions from "../Components/MotherOfQuestions";
 
-import ListOfAnswers from '../Components/ListOfAnswers/ListOfAnswers';
-import DefaultTextQuestion from "../Components/DefaultTextQuestion/DefaultTextQuestion";
-import TextFieldWitHhighlighting from '../Components/TextQuerstionWithHighlighting/TextFieldWitHhighlighting'
+import textdata from './testTests.json'
 
 const Home = () => {
+
+    const [index, setIndex] = useState(0);
+    const answers: never[] = [];
+    const questionsCount = textdata.questions.length
+
     return(
         <div>
-            <TextFieldWitHhighlighting />
+            <MotherOfQuestions answers={answers} questionIndex={index} question={textdata.questions[index]} setQuestionIndex={setIndex} isLast={index === questionsCount-1} />
         </div>
     )
 }

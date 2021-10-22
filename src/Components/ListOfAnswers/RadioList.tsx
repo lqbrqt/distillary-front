@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -27,52 +27,55 @@ const styles = (theme:any) => ({
   }
 });
 
-class RadioList extends React.Component {
-  state = {
-    checked: 0
-  };
+const RadioList = (props:{options:Array<string>, index:number, setIndex:any, answers:any, isLast:boolean}) => {
 
-  handleToggle = (value:any) => () => {
-    this.setState({ checked: value });
-  };
+    const [state, setState] = useState('');
 
-  render() {
-    // const { classes } = this.props;
+    const handleToggle = (value:any) => () => {
+        //@ts-ignore
+        setState({ checked: value });
+      };
 
-    return (
-      <div>
+      const buttonClickHandler = () => {
+        props.setIndex(props.index + 1);
+        props.answers.push({"type":"textQuestion", "text":state})
+    }
+
+    const lastQuestionHandler = () => {
+        alert('Все!')
+    }
+    
+    return(
+        <div>
         <List>
-          {[0, 1, 2, 3, 4].map(value => (
+          {props.options.map(value => (
             <ListItem
               key={value}
               role={undefined}
               button
-              onClick={this.handleToggle(value)}
+              onClick={handleToggle(value)}
             //   className={classes.listItem}
             >
               <FormControlLabel
                 control={<Radio />}
-                checked={this.state.checked === value}
+                //@ts-ignore
+                checked={state.checked === value}
                 tabIndex={-1}
                 // disableRipple
                 label=''
               />
               <ListItemText
-                primary={`This a a multiline answers, please work please please`}
+                primary={value}
               />
             </ListItem>
           ))}
         </List>
-        <Button variant="contained" endIcon={<SendIcon />}>
-            Send
+        <Button onClick={props.isLast ? lastQuestionHandler : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+            {props.isLast ? "Закончить опрос" : "Далее"}
         </Button>
       </div>
-    );
-  }
+    )
 }
 
-// RadioList.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
 
-export default withStyles(styles)(RadioList);
+export default RadioList;

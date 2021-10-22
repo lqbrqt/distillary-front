@@ -7,11 +7,7 @@ import HomePage from './Pages/Home'
 
 function App() {
   return (
-    <BrowserRouter>
-    <Header />
-      <Route path='/home' component={HomePage} exact={true} />
-      <Redirect to='/home' />
-    </BrowserRouter>
+    <HomePage />
   );
 }
 

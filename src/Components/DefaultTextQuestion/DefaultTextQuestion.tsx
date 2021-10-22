@@ -23,20 +23,22 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const DefaultTextQuestion = () => {
+const DefaultTextQuestion = (props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean}) => {
 
     const classes = useStyles();
+
+
 
     return(
         <Container component="main" maxWidth="xs">
       <CssBaseline />
 
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4">
-          Qual foi o seu primeiro bixo de estimação?
+        <Typography onMouseDown={(e:any) => {e.preventDefault(); return false}} component="h1" variant="h4">
+          {props.text}
         </Typography>
         <form className={classes.form} noValidate>
-          <InputTextField />
+          <InputTextField isLast={props.isLast} answers={props.answers} index={props.index} setIndex={props.setIndex}/>
         </form>
       </div>
     </Container>
