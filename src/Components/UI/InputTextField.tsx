@@ -3,19 +3,20 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send'
+import { API_URI } from '../../config';
 
-export default function InputTextField(props:{setIndex:any, index:number, answers:any, isLast:any}) {
+export default function InputTextField(props:{id:number, setIndex:any, index:number, answers:any, isLast:any, lastQuestionHandler:any, setAnswers:any}) {
 
     const [value, setValue] = useState('');
 
     const buttonClickHandler = () => {
         props.setIndex(props.index + 1);
-        props.answers.push({"type":"textQuestion", "text":value})
+        alert('asdasd')
+        props.setAnswers([...props.answers, {"type":"textQuestion", "text":value, id:props.id}])
+        setTimeout(console.log, 1000, props.answers)
+
     }
 
-    const lastQuestionHandler = () => {
-        alert('Все!')
-    }
 
   return (
     <Box
@@ -27,7 +28,7 @@ export default function InputTextField(props:{setIndex:any, index:number, answer
       autoComplete="off"
     >
       <TextField value={value} onChange={(e:any) => setValue(e.target.value)} id="filled-basic" label="Filled" variant="filled" multiline />
-      <Button onClick={props.isLast ? lastQuestionHandler : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+      <Button onClick={props.isLast ? (() => props.lastQuestionHandler({"type":"codeQuestion", "text": value, id:props.id})) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
         {props.isLast ? "Закончить опрос" : "Далее"}
     </Button>
     </Box>

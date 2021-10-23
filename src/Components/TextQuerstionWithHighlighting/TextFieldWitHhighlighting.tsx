@@ -8,6 +8,8 @@ import Container from "@material-ui/core/Container";
 import { Button } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send'
 import "@uiw/react-textarea-code-editor/dist.css";
+import { API_URI } from "../../config";
+import axios from 'axios';
 
 const CodeEditor = dynamic(
     //@ts-ignore
@@ -32,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean}) {
+function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) {
   const [code, setCode] = React.useState(
     `function add(a, b) {\n  return a + b;\n}`
   );
@@ -40,13 +42,14 @@ function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:numbe
     const classes = useStyles();
 
     const buttonClickHandler = () => {
+      alert('assdaadssdadsa')
         props.setIndex(props.index + 1);
-        props.answers.push({"type":"codeQuestion", "text": code})
+        props.setAnswers([...props.answers, {"type":"codeQuestion", "text": code, id:props.id}])
+        setTimeout(console.log, 1000, props.answers)
+        //console.log(props.answers)
+
     }
 
-    const lastQuestionHandler = () => {
-        alert(props.isLast)
-    }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -73,7 +76,7 @@ function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:numbe
       />      
       </form>
     </div>
-    <Button onClick={props.isLast ? lastQuestionHandler : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+    <Button onClick={props.isLast ? () => props.lastQuestionHandler({"type":"codeQuestion", "text": code, id:props.id}) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
         {props.isLast ? "Закончить опрос" : "Далее"}
     </Button>
   </Container>

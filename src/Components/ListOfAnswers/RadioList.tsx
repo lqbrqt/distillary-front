@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -16,6 +18,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Button } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send'
+import { API_URI } from "../../config";
 
 const styles = (theme:any) => ({
   root: {
@@ -27,7 +30,7 @@ const styles = (theme:any) => ({
   }
 });
 
-const RadioList = (props:{options:Array<string>, index:number, setIndex:any, answers:any, isLast:boolean}) => {
+const RadioList = (props:{options:Array<string>, index:number, setIndex:any, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) => {
 
     const [state, setState] = useState('');
 
@@ -37,12 +40,10 @@ const RadioList = (props:{options:Array<string>, index:number, setIndex:any, ans
       };
 
       const buttonClickHandler = () => {
+        alert('asdasdasd')
         props.setIndex(props.index + 1);
-        props.answers.push({"type":"textQuestion", "text":state})
-    }
-
-    const lastQuestionHandler = () => {
-        alert('Все!')
+        props.setAnswers([...props.answers, {type:"textQuestion", text:state.checked, id:props.id}])
+        setTimeout(console.log, 1000, props.answers)
     }
     
     return(
@@ -70,7 +71,7 @@ const RadioList = (props:{options:Array<string>, index:number, setIndex:any, ans
             </ListItem>
           ))}
         </List>
-        <Button onClick={props.isLast ? lastQuestionHandler : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+        <Button onClick={props.isLast ? (() => props.lastQuestionHandler({"type":"codeQuestion", "text": state.checked, id:props.id})) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
             {props.isLast ? "Закончить опрос" : "Далее"}
         </Button>
       </div>
