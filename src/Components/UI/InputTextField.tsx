@@ -28,7 +28,7 @@ export default function InputTextField(props:{id:number, setIndex:any, index:num
       autoComplete="off"
     >
       <TextField value={value} onChange={(e:any) => setValue(e.target.value)} id="filled-basic" label="Filled" variant="filled" multiline />
-      <Button onClick={props.isLast ? (() => props.lastQuestionHandler({"type":"codeQuestion", "text": value, id:props.id})) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+      <Button onClick={props.isLast ? (() => props.lastQuestionHandler({"type":"textQuestion", "text": value, id:props.id})) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
         {props.isLast ? "Закончить опрос" : "Далее"}
     </Button>
     </Box>

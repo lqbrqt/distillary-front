@@ -40,7 +40,6 @@ const RadioList = (props:{options:Array<string>, index:number, setIndex:any, ans
       };
 
       const buttonClickHandler = () => {
-        alert('asdasdasd')
         props.setIndex(props.index + 1);
         props.setAnswers([...props.answers, {type:"textQuestion", text:state.checked, id:props.id}])
         setTimeout(console.log, 1000, props.answers)
@@ -71,7 +70,7 @@ const RadioList = (props:{options:Array<string>, index:number, setIndex:any, ans
             </ListItem>
           ))}
         </List>
-        <Button onClick={props.isLast ? (() => props.lastQuestionHandler({"type":"codeQuestion", "text": state.checked, id:props.id})) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
+        <Button onClick={props.isLast ? (() => props.lastQuestionHandler({"type":"textQuestion", "text": state.checked, id:props.id})) : buttonClickHandler} variant="contained" endIcon={<SendIcon />}>
             {props.isLast ? "Закончить опрос" : "Далее"}
         </Button>
       </div>

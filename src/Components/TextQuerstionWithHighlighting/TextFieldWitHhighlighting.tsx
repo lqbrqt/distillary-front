@@ -42,7 +42,6 @@ function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:numbe
     const classes = useStyles();
 
     const buttonClickHandler = () => {
-      alert('assdaadssdadsa')
         props.setIndex(props.index + 1);
         props.setAnswers([...props.answers, {"type":"codeQuestion", "text": code, id:props.id}])
         setTimeout(console.log, 1000, props.answers)
