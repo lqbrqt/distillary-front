@@ -66,7 +66,7 @@ const Home = () => {
         <div>
             {index === -1 ? <LoginForm setAnswers={setAnswers} answers={answers} index={index} setIndex={setIndex}/> :
             //@ts-ignore
-            data ? <MotherOfQuestions setAnswers={setAnswers} answers={answers} lastQuestionHandler={lastQuestionHandler} questionIndex={index} question={data.questions[index]} setQuestionIndex={setIndex} isLast={index === questionsCount-1} /> : <div>Loading...</div>
+            data && data.questions? <MotherOfQuestions setAnswers={setAnswers} answers={answers} lastQuestionHandler={lastQuestionHandler} questionIndex={index} question={data.questions[index]} setQuestionIndex={setIndex} isLast={index === questionsCount-1} /> : <div>Loading...</div>
             }
         </div>
     )
