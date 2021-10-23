@@ -5,9 +5,9 @@ import MotherOfQuestions from "../Components/MotherOfQuestions";
 import LoginForm from "../Components/UI/Loginform";
 import axios from 'axios';
 
-import textdata from './testTests.json'
 import { API_URI } from "../config";
 import ListOfAnswers from "../Components/ListOfAnswers/ListOfAnswers";
+import ResultCard from "../Components/ResultCard";
 
 const getData = async () => {
     const result = await axios.get(`${API_URI}/test/random`);
@@ -19,6 +19,8 @@ const Home = () => {
     const [index, setIndex] = useState(-1);
     const [data, setData] = useState();
     const [answers, setAnswers] = useState([]);
+    const [showResult, setShowResult] = useState(false);
+    const [result, setResult] = useState();
     //@ts-ignore
     const [questionsCount, setQuestionsCount] = useState(0);
 
@@ -36,7 +38,7 @@ const Home = () => {
         //@ts-ignore
         const outAnswers = [...answers, lastAnswer]
         //@ts-ignore
-        axios.post(`${API_URI}/test/${data.id}`, {
+        const response = await axios.post(`${API_URI}/test/${data.id}`, {
             user:{
                 //@ts-ignore
                 nickname:outAnswers[0].login,
@@ -45,10 +47,18 @@ const Home = () => {
             }, 
             answers:outAnswers.slice(1)
         })
+        //@ts-ignore
+        setResult(response.data.right)
+        setShowResult(true);
     }
+    
 
-    const sendAnswers = () => {
-        
+    if(showResult){
+        return(
+            <div>
+                <ResultCard  countOfRightAnswers={result}/>
+            </div>
+        )
     }
 
     return(
