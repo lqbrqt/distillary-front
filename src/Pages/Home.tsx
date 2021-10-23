@@ -29,6 +29,7 @@ const Home = () => {
         (res=> {
             //@ts-ignore
             setData(res.data)
+            
             //@ts-ignore
             setQuestionsCount(res.data.questions.length)
         })

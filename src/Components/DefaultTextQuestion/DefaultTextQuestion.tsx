@@ -23,11 +23,9 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const DefaultTextQuestion = (props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) => {
+const DefaultTextQuestion = (props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number, time: number}) => {
 
     const classes = useStyles();
-
-
 
     return(
         <Container component="main" maxWidth="xs">
@@ -38,7 +36,7 @@ const DefaultTextQuestion = (props:{text:string, setIndex:any, index:number, ans
           {props.text}
         </Typography>
         <form className={classes.form} noValidate>
-          <InputTextField id={props.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} index={props.index} setIndex={props.setIndex}/>
+          <InputTextField id={props.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} index={props.index} setIndex={props.setIndex} time={props.time}/>
         </form>
       </div>
     </Container>

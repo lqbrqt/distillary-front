@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
@@ -26,14 +26,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ListOfAnswers(props:{text:string, options:Array<string>, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) {
+export default function ListOfAnswers(props:{text:string, options:Array<string>, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number, time:number}) {
   const classes = useStyles();
-
-
-
+  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+        
 
       <div className={classes.paper}>
         <Typography onMouseDown={(e:any) => {e.preventDefault(); return false}} component="h1" variant="h4">
