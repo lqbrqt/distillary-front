@@ -11,6 +11,7 @@ import ResultCard from "../Components/ResultCard";
 
 const getData = async () => {
     const result = await axios.get(`${API_URI}/test/random`);
+    console.log(result)
     return result;
 }
 

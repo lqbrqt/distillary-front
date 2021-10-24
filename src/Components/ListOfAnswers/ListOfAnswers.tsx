@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ListOfAnswers(props:{text:string, options:Array<string>, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number, time:number}) {
+export default function ListOfAnswers(props:{time:number,text:string, options:Array<string>, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) {
   const classes = useStyles();
   
   return (
@@ -39,7 +39,7 @@ export default function ListOfAnswers(props:{text:string, options:Array<string>,
           {props.text}
         </Typography>
         <form className={classes.form} noValidate>
-          <RadioList id={props.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} options={props.options} index={props.index} setIndex={props.setIndex}/>
+          <RadioList timer={props.time} id={props.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} options={props.options} index={props.index} setIndex={props.setIndex}/>
         </form>
       </div>
     </Container>

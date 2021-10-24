@@ -25,9 +25,9 @@ const MotherOfQuestions = (props:{question:any, setQuestionIndex:any, questionIn
 
     return(
         <div>
-            {props.question ? props.question.type === 'codeQuestion' ? <TextFieldWitHhighlighting setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} id={props.question.id} text={props.question.text} index={props.questionIndex} setIndex={props.setQuestionIndex} /> :
-            props.question.options.length !== 0 ? <ListOfAnswers id={props.question.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} index={props.questionIndex} setIndex={props.setQuestionIndex} text={props.question.text} options={props.question.options} time={props.question.timeToComplete}/> :
-            <DefaultTextQuestion id={props.question.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} index={props.questionIndex} setIndex={props.setQuestionIndex} text={props.question.text} time={props.question.timeToQuestion} /> : <div>Loading</div> 
+            {props.question ? props.question.type === 'codeQuestion' ? <TextFieldWitHhighlighting time={timeLeft} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} id={props.question.id} text={props.question.text} index={props.questionIndex} setIndex={props.setQuestionIndex} /> :
+            props.question.options.length !== 0 ? <ListOfAnswers time={timeLeft} id={props.question.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} index={props.questionIndex} setIndex={props.setQuestionIndex} text={props.question.text} options={props.question.options}/> :
+            <DefaultTextQuestion timer={timeLeft} id={props.question.id} setAnswers={props.setAnswers} lastQuestionHandler={props.lastQuestionHandler} isLast={props.isLast} answers={props.answers} index={props.questionIndex} setIndex={props.setQuestionIndex} text={props.question.text} /> : <div>Loading</div> 
             
         }{timeLeft <= 0 ? <p>Time to left:</p>: <p>Time to left: {timeLeft}</p>}
         </div>

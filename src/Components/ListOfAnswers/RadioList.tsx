@@ -30,7 +30,7 @@ const styles = (theme:any) => ({
   }
 });
 
-const RadioList = (props:{options:Array<string>, index:number, setIndex:any, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) => {
+const RadioList = (props:{timer:number,options:Array<string>, index:number, setIndex:any, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) => {
 
     const [state, setState] = useState('');
 
@@ -45,6 +45,10 @@ const RadioList = (props:{options:Array<string>, index:number, setIndex:any, ans
         setTimeout(console.log, 1000, props.answers)
     }
     
+    if(props.time === 0){
+      buttonClickHandler();
+    }
+
     return(
         <div>
         <List>

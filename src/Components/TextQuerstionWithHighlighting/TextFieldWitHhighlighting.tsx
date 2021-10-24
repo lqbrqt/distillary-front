@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) {
+function TextFieldWitHhighlighting(props:{time:Number,text:string, setIndex:any, index:number, answers:any, isLast:boolean, lastQuestionHandler:any, setAnswers:any, id:number}) {
   const [code, setCode] = React.useState(
     `function add(a, b) {\n  return a + b;\n}`
   );
@@ -49,7 +49,9 @@ function TextFieldWitHhighlighting(props:{text:string, setIndex:any, index:numbe
 
     }
 
-
+    if(props.time === 0){
+      buttonClickHandler();
+    }
   return (
     <Container component="main" maxWidth="xs">
     <CssBaseline />
